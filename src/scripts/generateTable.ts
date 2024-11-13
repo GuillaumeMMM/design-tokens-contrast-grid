@@ -75,6 +75,7 @@ export function generateTable(
 
         cell.style.color = `${txtColor.initialVal}`;
         cell.style.backgroundColor = `${bgColor.initialVal}`;
+        cell.style.fontSize = textSize === "large" ? "1.5rem" : "1rem";
 
         const contrastLevelSpan = document.createElement("span");
         contrastLevelSpan.setAttribute("slot", "contrast-level");

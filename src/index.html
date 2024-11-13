@@ -3,7 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Design tokens contrast checker</title>
+    <meta
+      name="description"
+      content="Accessible contrast grid builder for design systems tokens"
+    />
+    <title>Home | Design tokens contrast grid</title>
     <link
       rel="icon"
       href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌃</text></svg>"
@@ -11,100 +15,109 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <h1>Design Tokens Contrast Checker</h1>
+    <header class="title">
+      <h1>Design Tokens Contrast Grid</h1>
+    </header>
+    <main>
+      <template id="conformity-cell-template">
+        <style>
+          :host {
+            display: table-cell;
+            border: 2px solid var(--border-color);
+          }
 
-    <template id="conformity-cell-template">
-      <style>
-        :host {
-          display: table-cell;
-          border: 2px solid var(--border-color);
-        }
+          .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            border: 0;
+            padding: 0;
 
-        .visually-hidden {
-          position: absolute;
-          width: 1px;
-          height: 1px;
-          margin: -1px;
-          border: 0;
-          padding: 0;
+            white-space: nowrap;
+            clip-path: inset(100%);
+            clip: rect(0 0 0 0);
+            overflow: hidden;
+          }
 
-          white-space: nowrap;
-          clip-path: inset(100%);
-          clip: rect(0 0 0 0);
-          overflow: hidden;
-        }
+          .cell-content {
+            padding: 10px;
+            white-space: nowrap;
+          }
 
-        .cell-content {
-          padding: 5px;
-        }
-
-        .contrast-level-container {
-          background-color: white;
-          color: black;
-          padding: 1px 3px;
-          border-radius: 3px;
-          border: 2px solid var(--border-color);
-          display: inline-block;
-        }
-      </style>
-      <td>
-        <div class="cell-content">
-          <p><span class="visually-hidden">Example text :</span>Lorem ipsum</p>
-          <div class="contrast-level-container">
-            <slot name="contrast-level"></slot>
+          .contrast-level-container {
+            background-color: white;
+            color: black;
+            padding: 1px 3px;
+            border-radius: 3px;
+            border: 2px solid var(--border-color);
+            display: inline-block;
+          }
+        </style>
+        <td>
+          <div class="cell-content">
+            <p>
+              <span class="visually-hidden">Example text :</span>Lorem ipsum
+            </p>
+            <div class="contrast-level-container">
+              <slot name="contrast-level"></slot>
+            </div>
           </div>
+        </td>
+      </template>
+
+      <form>
+        <div class="form-group">
+          <label for="tokens">CSS token variables</label>
+          <textarea id="tokens" name="tokens"></textarea>
         </div>
-      </td>
-    </template>
+        <div class="form-group">
+          <label for="contrast-validation">Contrast validation metrod</label>
+          <select
+            name="contrast-validation"
+            id="contrast-validation"
+            value="wcag2.2AA"
+          >
+            <option value="wcag2.2AA">WCAG 2.2 AA</option>
+            <option value="wcag2.2AAA">WCAG 2.2 AAA</option>
+            <option value="rgaa4.1">RGAA 4.1</option>
+            <option value="rgaa4.1">RAAM 1</option>
+          </select>
+          <!--  <a href="./validation.html" class="select-info"
+            >How does the validation work ?
+            <span aria-hidden="true">🔦</span></a
+          > -->
+        </div>
+        <div class="form-group">
+          <label for="text-size">Text size</label>
+          <select name="text-size" id="text-size" value="normal">
+            <option value="normal">Normal</option>
+            <option value="large">Large</option>
+          </select>
+        </div>
+        <div class="form-group inline">
+          <label for="only-ok" class="checkbox-control">
+            <input type="checkbox" id="only-ok" />
+            Only combinations with a high enough contrast</label
+          >
+        </div>
+      </form>
 
-    <form>
-      <div class="form-group">
-        <label for="tokens">CSS token variables</label>
-        <textarea id="tokens" name="tokens"></textarea>
-      </div>
-      <div class="form-group">
-        <label for="contrast-validation">Contrast validation metrod</label>
-        <select
-          name="contrast-validation"
-          id="contrast-validation"
-          value="wcag2.2AA"
-        >
-          <option value="wcag2.2AA">WCAG 2.2 AA</option>
-          <option value="wcag2.2AAA">WCAG 2.2 AAA</option>
-          <option value="rgaa4.1">RGAA 4.1</option>
-          <option value="rgaa4.1">RAAM 1</option>
-          <option value="rgaa4.1">APCA</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="text-size">Text size</label>
-        <select name="text-size" id="text-size" value="normal">
-          <option value="normal">Normal</option>
-          <option value="large">Large</option>
-        </select>
-      </div>
-      <div class="form-group inline">
-        <label for="only-ok" class="checkbox-control">
-          <input type="checkbox" id="only-ok" />
-          Only combinations with a high enough contrast</label
-        >
-      </div>
-    </form>
+      <button type="button" id="save-button" class="save-button">
+        <span aria-hidden="true">💾&nbsp;&nbsp;</span>Save as image (.jpg)
+      </button>
 
-    <button type="button" id="save-button" class="save-button">
-      <span aria-hidden="true">💾&nbsp;&nbsp;</span>Save as image (.jpg)
-    </button>
-
-    <table id="contrast-table">
-      <thead>
-        <tr></tr>
-      </thead>
-      <tbody></tbody>
-      <caption>
-        Constrast combinations table with text color rows and background color
-        columns
-      </caption>
-    </table>
+      <table id="contrast-table">
+        <thead>
+          <tr></tr>
+        </thead>
+        <tbody></tbody>
+        <caption>
+          Constrast combinations table with text color rows and background color
+          columns
+        </caption>
+      </table>
+    </main>
     <script src="../build/script.js"></script>
   </body>
 </html>
