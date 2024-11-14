@@ -29,6 +29,7 @@ export function generateTable(
 
   backgroundColors.forEach((bgColor, bgColorIndex) => {
     const th = document.createElement("th");
+    th.setAttribute("scope", "col");
 
     const colColorContent = document.createElement("div");
     colColorContent.classList.add("th-content");
@@ -47,6 +48,7 @@ export function generateTable(
       if (bgColorIndex === 0) {
         const tr = document.createElement("tr");
         const thRow = document.createElement("th");
+        thRow.setAttribute("scope", "row");
 
         const rowColorContent = document.createElement("div");
         rowColorContent.classList.add("th-content");
