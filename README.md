@@ -1,6 +1,6 @@
 # Design Tokens Contrast Grid
 
-Code for the [contrastgrid.netlify.app](https://contrastgrid.netlify.app/) website.
+Code for the [contrastgrid.eu](https://contrastgrid.eu/) website.
 
 ## Overview
 
