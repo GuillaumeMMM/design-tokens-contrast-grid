@@ -1,6 +1,6 @@
 # Design Tokens Contrast Grid
 
-Code for the [contrastgrid.eu](https://contrastgrid.eu/) website.
+Code for the [https://contrastcheckergrid.com/](https://contrastcheckergrid.com/) website.
 
 ## Overview
 
