@@ -277,3 +277,14 @@ input[type="checkbox"]:focus-visible {
     box-shadow: inset 1em 1em rgb(23, 46, 255);
   }
 }
+
+.contrast-table-container {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
