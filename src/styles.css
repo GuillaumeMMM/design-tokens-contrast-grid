@@ -283,6 +283,10 @@ input[type="checkbox"]:focus-visible {
   overflow-x: auto;
 }
 
+.show-on-export {
+  display: none;
+}
+
 header {
   display: flex;
   flex-wrap: wrap;

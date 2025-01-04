@@ -125,8 +125,21 @@ onlyOkCheckbox.addEventListener("change", (e: Event) => {
 
 saveButton.addEventListener("click", () => {
   const table = document.getElementById("contrast-table");
+
   if (table) {
+    //  Show additional informations
+    Array.from(table.getElementsByClassName("show-on-export")).forEach((el) => {
+      (el as HTMLElement).style.display = "inline-block";
+    });
+
     html2canvas(table).then((canvas) => {
+      //  Hide additional informations
+      Array.from(table.getElementsByClassName("show-on-export")).forEach(
+        (el) => {
+          (el as HTMLElement).style.display = "none";
+        }
+      );
+
       const link = document.createElement("a");
       link.download = `design-tokens-contrast-checker_${form.contrastMethod}_${
         form.textSize
