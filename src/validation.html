@@ -11,13 +11,110 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <header class="title">
-      <h1>Validation methods</h1>
-    </header>
-    <main>
+    <main class="validation">
+      <h1>Contrast validation methods</h1>
+
       <a href="./index.html"
-        ><span class="aria-hidden">⬅️</span> Back to the contrast grid</a
+        ><span aria-hidden="true">⬅️</span> Back to the contrast grid</a
       >
+
+      <div class="method">
+        <h2>
+          Web Content Accessibility Guidelines (WCAG)
+          <span aria-hidden="true">🌐</span>
+        </h2>
+        <p class="validation">
+          The
+          <a href="https://www.w3.org/TR/WCAG22/#contrast-minimum"
+            >WCAG 2.2 contrast minimum (AA) requirements</a
+          >
+          are the following :
+        </p>
+        <blockquote cite="https://www.w3.org/TR/WCAG22/#contrast-minimum">
+          <ul>
+            <li>
+              The visual presentation of text and images of text has a contrast
+              ratio of at least 4.5:1
+            </li>
+            <li>
+              Large-scale text and images of large-scale text have a contrast
+              ratio of at least 3:1
+            </li>
+          </ul>
+        </blockquote>
+
+        <p class="validation">
+          And the
+          <a href="https://www.w3.org/TR/WCAG21/#contrast-enhanced"
+            >WCAG 2.2 contrast enhanced (AAA) recommendations</a
+          >
+          are the following :
+        </p>
+        <blockquote cite="https://www.w3.org/TR/WCAG21/#contrast-enhanced">
+          <ul>
+            <li>
+              The visual presentation of text and images of text has a contrast
+              ratio of at least 7:1
+            </li>
+            <li>
+              Large-scale text and images of large-scale text have a contrast
+              ratio of at least 4.5:1
+            </li>
+          </ul>
+        </blockquote>
+      </div>
+
+      <div class="method">
+        <h2 lang="fr">
+          Référentiel général d’amélioration de l’accessibilité (RGAA)
+          <span aria-hidden="true">🇫🇷</span>
+        </h2>
+        <p class="validation">
+          The
+          <a
+            href="https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#3"
+            >RGAA 4.1 text color contrast requirements</a
+          >
+          are the following :
+        </p>
+        <blockquote
+          cite="https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#3"
+        >
+          <ul>
+            <li>
+              The contrast between the text color and its background color is at
+              least 4.5:1
+            </li>
+            <li>
+              The contrast ratio between text of size 24px or larger and its
+              background is at least 3:1
+            </li>
+          </ul>
+        </blockquote>
+      </div>
+
+      <div class="method">
+        <h2 lang="fr">
+          Référentiel d'accessibilité des applications mobiles (RAAM)
+          <span aria-hidden="true">🇱🇺</span>
+        </h2>
+        <p class="validation">
+          The
+          <a
+            href="https://accessibilite.public.lu/fr/raam1/referentiel-technique.html#test-2-2-1"
+            >RAAM 2.0 text color contrast requirements</a
+          >
+          are the following :
+        </p>
+        <blockquote
+          cite="https://accessibilite.public.lu/fr/raam1/referentiel-technique.html#test-2-2-1"
+        >
+          <p>
+            The contrast ratio between the text and its background is at least
+            4.5:1 for normal-sized text and at least 3:1 for large text.
+          </p>
+        </blockquote>
+      </div>
     </main>
   </body>
 </html>

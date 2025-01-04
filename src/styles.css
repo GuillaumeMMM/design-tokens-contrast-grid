@@ -12,6 +12,10 @@
   padding: 0;
 }
 
+h2 {
+  margin: 2rem 0 1rem 0;
+}
+
 body {
   font-family: system-ui, "Open Sans", "Helvetica Neue", sans-serif;
   line-height: 1.5;
@@ -19,8 +23,21 @@ body {
   color: rgb(53, 53, 53);
 }
 
+ul {
+  list-style: none;
+}
+
 main {
   padding: 1rem;
+}
+
+main.validation {
+  max-width: 1000px;
+  margin-bottom: 2rem;
+}
+
+p.validation {
+  margin: 10px 0 5px 0;
 }
 
 .title {
@@ -55,6 +72,12 @@ select {
     outline: 2px solid rgb(176, 184, 254);
     outline-offset: 2px;
   }
+}
+
+blockquote {
+  background-color: rgb(227, 230, 250);
+  border-radius: 3px;
+  padding: 1rem;
 }
 
 select {
