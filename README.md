@@ -11,6 +11,6 @@ The Contrast Grid tool helps you create a contrast table for your design tokens,
 - [x] Add an explanation page to clarify different accessibility specifications.
 - [ ] Add support for additional accessibility guideline options.
 - [ ] Implement support for other contrast perception algorithms.
-- [ ] Enable importing design tokens from a JSON file.
+- [x] Enable importing design tokens from a JSON file.
 - [ ] Enable importing design tokens from TypeScript variables.
 - [ ] Take into consideration different ways of considering "large text".

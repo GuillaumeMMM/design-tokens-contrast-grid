@@ -24,6 +24,16 @@ export function generateTable(
     tableBody.removeChild(tableBody.firstChild);
   }
 
+  if (textColors.length === 0) {
+    const noDataTr = document.createElement("tr");
+    const noDataTd = document.createElement("td");
+    noDataTd.textContent = "No colors were found in the input.";
+    noDataTr.appendChild(noDataTd);
+    tableBody.appendChild(noDataTr);
+
+    return;
+  }
+
   const th = document.createElement("th");
   tableHeadRow.appendChild(th);
 

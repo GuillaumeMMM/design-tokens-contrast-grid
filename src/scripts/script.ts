@@ -18,6 +18,15 @@ const defaultForm = {
 };
 
 function getColorsFromTokens(tokens: string) {
+  try {
+    JSON.parse(tokens);
+    return getColorsFromJSONTokens(JSON.parse(tokens));
+  } catch {
+    return getColorsFromCSSTokens(tokens);
+  }
+}
+
+function getColorsFromCSSTokens(tokens: string) {
   const colors = tokens
     .trim()
     .split("\n")
@@ -38,6 +47,33 @@ function getColorsFromTokens(tokens: string) {
     });
 
   return colors;
+}
+
+function getColorsFromJSONTokens(tokens: Object) {
+  const values = {};
+
+  function traverse(currentObj, currentName) {
+    for (const [key, value] of Object.entries(currentObj)) {
+      const newKey = currentName ? `${currentName}-${key}` : key;
+      if (typeof value === "object" && value !== null) {
+        traverse(value, newKey);
+      } else {
+        values[newKey] = value;
+      }
+    }
+  }
+
+  traverse(tokens, "");
+
+  const validColors: Color[] = Object.entries(values)
+    .filter(([key, val]) => typeof val === "string" && parse(val).space)
+    .map(([key, val]) => ({
+      code: parse(val as string),
+      initialVal: val as string,
+      name: key,
+    }));
+
+  return validColors;
 }
 
 customElements.define(
