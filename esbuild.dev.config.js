@@ -3,7 +3,7 @@ import { build } from "esbuild";
 await build({
   bundle: true,
   entryPoints: ["src/scripts/script.ts"],
-  outdir: "src",
+  outdir: "src/scripts",
   minify: true,
   format: "esm",
   treeShaking: true,

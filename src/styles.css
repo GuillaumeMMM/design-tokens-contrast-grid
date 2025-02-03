@@ -1,5 +1,6 @@
+@import "../node_modules/@guillaumemmm/marquedefabrique/index.css";
+
 :root {
-  --background-color: rgb(250, 250, 250);
   --border-color: rgba(27, 31, 35, 0.318);
   --table-border-color: rgb(104, 117, 130);
   --shadow: rgba(27, 31, 35, 0.04) 0 1px 0,
@@ -12,19 +13,10 @@
   padding: 0;
 }
 
-h2 {
-  margin: 2rem 0 1rem 0;
-}
-
 body {
   font-family: system-ui, "Open Sans", "Helvetica Neue", sans-serif;
   line-height: 1.5;
-  background-color: var(--background-color);
-  color: rgb(53, 53, 53);
-}
-
-ul {
-  list-style: none;
+  background: var(--mdf-background-gradient);
 }
 
 main {
@@ -44,63 +36,10 @@ p.validation {
   padding: 10px 1rem;
 }
 
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  border: 0;
-  padding: 0;
-
-  white-space: nowrap;
-  clip-path: inset(100%);
-  clip: rect(0 0 0 0);
-  overflow: hidden;
-}
-
-input,
-textarea,
-select {
-  border-radius: 8px;
-  border: 2px solid var(--border-color);
-  font-size: 1rem;
-  padding: 10px 0.8rem;
-  line-height: 1.5;
-
-  &:focus-visible {
-    border: 2px solid rgb(23, 46, 255);
-    outline: 2px solid rgb(176, 184, 254);
-    outline-offset: 2px;
-  }
-}
-
 blockquote {
   background-color: rgb(227, 230, 250);
   border-radius: 3px;
   padding: 1rem;
-}
-
-select {
-  width: 250px;
-  max-width: 100%;
-  cursor: pointer;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Ctitle%3Edown-arrow%3C%2Ftitle%3E%3Cg%20fill%3D%22%23000000%22%3E%3Cpath%20d%3D%22M10.293%2C3.293%2C6%2C7.586%2C1.707%2C3.293A1%2C1%2C0%2C0%2C0%2C.293%2C4.707l5%2C5a1%2C1%2C0%2C0%2C0%2C1.414%2C0l5-5a1%2C1%2C0%2C1%2C0-1.414-1.414Z%22%20fill%3D%22%23000000%22%3E%3C%2Fpath%3E%3C%2Fg%3E%3C%2Fsvg%3E");
-  background-position: calc(100% - 0.8rem);
-  background-repeat: no-repeat;
-
-  &:hover {
-    background-color: rgb(244, 244, 244);
-  }
-}
-
-label {
-  margin-bottom: 5px;
-  display: inline-block;
-  color: rgb(96, 96, 96);
-  cursor: pointer;
 }
 
 table {
@@ -152,14 +91,13 @@ form {
   width: 100%;
   max-width: 600px;
 
-  textarea {
-    height: 200px;
-    width: 100%;
+  .mdf-textarea-control {
     display: block;
   }
 
-  select {
-    display: block;
+  .textarea {
+    width: 100%;
+    height: 400px;
   }
 
   .form-group {
@@ -181,101 +119,13 @@ form {
   }
 }
 
-a {
-  border-radius: 6px;
-  color: rgb(23, 46, 255);
-
-  &:focus-visible {
-    border: 2px solid rgb(23, 46, 255);
-    outline: 2px solid rgb(176, 184, 254);
-    outline-offset: 2px;
-  }
-}
-
 .select-info {
-  display: block;
-  margin-top: 5px;
+  display: inline-block;
+  margin-top: 10px;
 }
 
 .save-button {
   margin-bottom: 1.5rem;
-}
-
-button {
-  appearance: none;
-  background-color: #fafbfc;
-  border: 2px solid var(--border-color);
-  border-radius: 6px;
-  box-shadow: var(--shadow);
-  cursor: pointer;
-  display: inline-block;
-  font-size: 1rem;
-  font-weight: bold;
-  padding: 9px 24px;
-  color: rgb(53, 53, 53);
-
-  &:hover {
-    background-color: rgb(244, 244, 244);
-  }
-
-  &:focus-visible {
-    border: 2px solid rgb(23, 46, 255);
-    outline: 2px solid rgb(176, 184, 254);
-    outline-offset: 2px;
-  }
-}
-
-.checkbox-control {
-  font-size: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
-}
-
-input[type="checkbox"] {
-  -webkit-appearance: none;
-  appearance: none;
-  margin: 0;
-  font: inherit;
-  color: rgb(102, 102, 102);
-  width: 1.4em;
-  height: 1.4em;
-  border: 0.15em solid var(--border-color);
-  border-radius: 3px;
-  padding: 0;
-  cursor: pointer;
-
-  display: grid;
-  place-content: center;
-
-  &:hover {
-    background-color: rgb(244, 244, 244);
-  }
-}
-
-input[type="checkbox"]::before {
-  content: "";
-  width: 0.8em;
-  height: 0.8em;
-  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
-  transform: scale(0);
-  transform-origin: bottom left;
-  box-shadow: inset 1em 1em black;
-  background-color: CanvasText;
-}
-
-input[type="checkbox"]:checked::before {
-  transform: scale(1);
-}
-
-input[type="checkbox"]:focus-visible {
-  border: 2px solid rgb(23, 46, 255);
-  outline: 2px solid rgb(176, 184, 254);
-  outline-offset: 2px;
-
-  &::before {
-    box-shadow: inset 1em 1em rgb(23, 46, 255);
-  }
 }
 
 .contrast-table-container {
@@ -292,4 +142,8 @@ header {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+h2 {
+  margin-top: 2rem;
 }

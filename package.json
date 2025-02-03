@@ -6,8 +6,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node esbuild.config.js && copyfiles -f \"src/**/*.{html,css}\" build/",
-    "watch:build": "chokidar 'src' -c 'node esbuild.dev.config.js'"
+    "build": "node esbuild.config.js && copyfiles -f \"src/**/*.html\" build/",
+    "watch:build": "chokidar 'src/scripts/*.ts' -c 'node esbuild.dev.config.js'"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +17,7 @@
     "esbuild": "^0.24.0"
   },
   "dependencies": {
+    "@guillaumemmm/marquedefabrique": "^1.0.1",
     "color-parse": "^2.0.2",
     "html2canvas": "^1.4.1"
   }
