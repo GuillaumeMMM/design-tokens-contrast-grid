@@ -1,8 +1,8 @@
 import html2canvas from "html2canvas";
-import { generateTable } from "./generateTable";
-import { Color } from "./types";
+import { generateTable } from "./scripts/generateTable";
+import { Color } from "./scripts/types";
 import parse from "color-parse";
-import { isLocalStorageAvailable } from "./localsotrage";
+import { isLocalStorageAvailable } from "./scripts/localsotrage";
 
 const defaultColors = `--white: #ffffff;
 --grey-1: #b1b1b3;

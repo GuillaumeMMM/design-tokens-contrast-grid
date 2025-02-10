@@ -6,14 +6,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node esbuild.config.js && copyfiles -f \"src/**/*.html\" build/",
-    "watch:build": "chokidar 'src/scripts/*.ts' -c 'node esbuild.dev.config.js'"
+    "build": "mkdir build && cp src/*.html build/ && esbuild src/styles.css src/script.ts --bundle --outdir=build --format=esm --minify",
+    "build:watch": "npm run build -- --watch"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "chokidar-cli": "^3.0.0",
-    "copyfiles": "^2.4.1",
     "esbuild": "^0.24.0"
   },
   "dependencies": {
