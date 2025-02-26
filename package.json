@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "mkdir build && cp src/*.html build/ && esbuild src/styles.css src/script.ts --bundle --outdir=build --format=esm --minify",
+    "build": "mkdir -p build && cp src/*.svg build/ && cp src/*.html build/ && esbuild src/styles.css src/script.ts --bundle --outdir=build --format=esm --minify",
     "build:watch": "npm run build -- --watch"
   },
   "author": "",
