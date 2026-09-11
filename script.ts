@@ -1,10 +1,11 @@
 import html2canvas from "html2canvas";
 import { generateTable } from "./scripts/generateTable";
-import { Color } from "./scripts/types";
+import { Color, JSONDesignTokens } from "./scripts/types";
 import { isLocalStorageAvailable } from "./scripts/localsotrage";
 import { colord, extend } from "colord";
 import a11yPlugin from "colord/plugins/a11y";
 import { getContrastLevel } from "./scripts/contrast";
+import { flattenDTCGTokens } from "./scripts/flattenDTCGTokens";
 
 extend([a11yPlugin]);
 
@@ -57,27 +58,22 @@ function getColorsFromCSSTokens(tokens: string) {
 
 function getColorsFromJSONTokens(tokens: Object) {
   const values = {};
+  console.log("getColorsFromJSONTokens");
+  const { tokens: tokensDTCG, errors: errorsDTCG } = flattenDTCGTokens(
+    tokens as JSONDesignTokens,
+  );
 
-  function traverse(currentObj: any, currentName: any) {
-    for (const [key, value] of Object.entries(currentObj)) {
-      const newKey = currentName ? `${currentName}-${key}` : key;
-      if (typeof value === "object" && value !== null) {
-        traverse(value, newKey);
-      } else {
-        //  @ts-expect-error
-        values[newKey] = value;
-      }
-    }
-  }
-
-  traverse(tokens, "");
-
-  const validColors: Color[] = Object.entries(values)
-    .filter(([key, val]) => typeof val === "string" && colord(val).isValid())
-    .map(([key, val]) => ({
-      colorHex: colord(val as string).toHex(),
-      initialVal: val as string,
-      name: key,
+  const validColors: Color[] = tokensDTCG
+    .filter(
+      (t) =>
+        t.$type === "color" &&
+        typeof t.$value === "string" &&
+        colord(t.$value).isValid(),
+    )
+    .map((t) => ({
+      colorHex: colord(t.$value as string).toHex(),
+      initialVal: t.$value as string,
+      name: t.key,
     }));
 
   return validColors;

@@ -7,12 +7,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "serve": "vite serve"
   },
   "license": "ISC",
   "dependencies": {
     "@guillaumemmm/marquedefabrique": "2.2.2",
-    "colord": "^2.10.0",
+    "colord": "2.10.0",
     "html2canvas": "1.4.1",
     "vite": "8.3.0"
   }

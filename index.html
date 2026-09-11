@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Accessible contrast grid builder for design systems tokens"
+      content="Accessible contrast grid builder for design systems tokens. See directly which background and text combination comply with your accessibility guidelines."
     />
     <title>Design tokens contrast grid</title>
     <link type="image/png" rel="icon" href="./assets/favicon.png" />
@@ -26,9 +26,6 @@
           <span class="mdf-highlighted mdf-highlighted-secondary"
             >find the background/text combinations that comply with WCAG and
             RGAA</span
-          >. Conformity is evaluated based on
-          <a href="./validation" class="select-info mdf-link"
-            >this validation method</a
           >.
         </p>
       </div>
@@ -119,7 +116,13 @@
         <div class="form-group">
           <label for="tokens" class="mdf-textarea">
             <div class="mdf-textarea-label">
-              Design tokens as DTCG JSON or CSS variables
+              Design tokens as
+              <a
+                class="mdf-link label-link"
+                href="https://www.w3.org/community/reports/design-tokens/CG-FINAL-format-20251028/"
+                >DTCG JSON</a
+              >
+              or CSS variables
             </div>
             <textarea
               id="tokens"

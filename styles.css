@@ -45,6 +45,14 @@ header {
     justify-content: center;
     gap: 2rem;
 
+    animation: fade-in 0.3s ease-out both;
+
+    @media (prefers-reduced-motion: reduce) {
+      &::-webkit-progress-value {
+        animation: none;
+      }
+    }
+
     .title {
       text-align: center;
       font-weight: 500;
@@ -111,6 +119,16 @@ header {
   }
 }
 
+main {
+  animation: fade-in 0.3s 0.2s ease-out both;
+
+  @media (prefers-reduced-motion: reduce) {
+    &::-webkit-progress-value {
+      animation: none;
+    }
+  }
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -121,6 +139,10 @@ form {
 
   .form-group {
     position: relative;
+  }
+
+  .label-link {
+    font-weight: 400;
   }
 
   .mdf-textarea-label,
@@ -237,6 +259,13 @@ form {
 
 footer {
   padding: 4rem;
+  animation: fade-in 0.3s 0.5s ease-out both;
+
+  @media (prefers-reduced-motion: reduce) {
+    &::-webkit-progress-value {
+      animation: none;
+    }
+  }
 
   ul {
     display: flex;
@@ -386,5 +415,17 @@ footer {
 @keyframes draw-tick {
   to {
     stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    transform: translateY(200px);
+    opacity: 0;
+  }
+
+  to {
+    transform: none;
+    opacity: 1;
   }
 }
