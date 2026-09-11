@@ -6,17 +6,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "mkdir -p build && cp src/*.svg build/ && cp src/*.html build/ && esbuild src/styles.css src/script.ts --bundle --outdir=build --format=esm --minify",
-    "build:watch": "npm run build -- --watch"
+    "dev": "vite",
+    "build": "vite build"
   },
-  "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "esbuild": "^0.24.0"
-  },
   "dependencies": {
-    "@guillaumemmm/marquedefabrique": "^1.0.1",
-    "color-parse": "^2.0.2",
-    "html2canvas": "^1.4.1"
+    "@guillaumemmm/marquedefabrique": "2.2.2",
+    "color-parse": "2.0.2",
+    "html2canvas": "1.4.1",
+    "vite": "8.3.0"
   }
 }

@@ -1,5 +1,3 @@
 /node_modules
-/build
+/dist
 .DS_Store
-src/scripts/script.js
-/.vscode
