@@ -1,6 +1,6 @@
 # Design Tokens Contrast Grid
 
-Code for the [https://contrastcheckergrid.com/](https://contrastcheckergrid.com/) website.
+Code for the [a11ycontrastgrid.guillaumemeigniez.me](https://a11ycontrastgrid.guillaumemeigniez.me/) website.
 
 ## Overview
 
@@ -12,5 +12,3 @@ The Contrast Grid tool helps you create a contrast table for your design tokens,
 - [ ] Add support for additional accessibility guideline options.
 - [ ] Implement support for other contrast perception algorithms.
 - [x] Enable importing design tokens from a JSON file.
-- [ ] Enable importing design tokens from TypeScript variables.
-- [ ] Take into consideration different ways of considering "large text".
