@@ -4,7 +4,7 @@ Code for the [https://contrastcheckergrid.com/](https://contrastcheckergrid.com/
 
 ## Overview
 
-The Contrast Grid tool helps you create a contrast table for your design tokens, allowing you to evaluate color contrast against a specific accessibility guideline. Unlike other contrast grid tools, the goal of this project is to make the process more accessible and to include regional accessibility specifications such as RGAA or RAAM.
+The Contrast Grid tool helps you create a contrast table for your design tokens, allowing you to evaluate color contrast against a specific accessibility guideline. Unlike other contrast grid tools, the goal of this project is to make the process more accessible and to include regional accessibility specifications such as RGAA.
 
 ## To do
 

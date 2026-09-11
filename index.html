@@ -7,44 +7,45 @@
       name="description"
       content="Accessible contrast grid builder for design systems tokens"
     />
-    <title>Home | Design tokens contrast grid</title>
-    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
-    <link rel="stylesheet" href="src/styles.css" />
-    <script src="src/script.js" type="module" defer></script>
+    <title>Design tokens contrast grid</title>
+    <link type="image/png" rel="icon" href="./assets/favicon.png" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./script.js" type="module" defer></script>
   </head>
   <body>
-    <header class="title">
-      <h1 class="mdf-title2">Design Tokens Contrast Grid</h1>
-      <div class="github-link">
-        <a
-          href="https://github.com/GuillaumeMMM/design-tokens-contrast-grid"
-          class="mdf-link"
-        >
-          View on github
-          <span aria-hidden="true">
-            <svg
-              width="1rem"
-              height="1rem"
-              xmlns="http://www.w3.org/2000/svg"
-              viewbox="0 0 100 100"
-            >
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z"
-                fill="#24292f"
-              />
-            </svg>
-          </span>
-        </a>
+    <header>
+      <div class="illustrations" aria-hidden="true">
+        <div class="fade"></div>
+        <div class="fade-top-left"></div>
+        <div class="fade-top-right"></div>
+      </div>
+      <div class="content">
+        <h1 class="title mdf-title2">Design Tokens Contrast Grid</h1>
+        <p class="info mdf-muted">
+          Visualize all the colors of your design system at once and easily
+          <span class="mdf-highlighted mdf-highlighted-secondary"
+            >filter the background/text combinations that comply with WCAG and
+            RGAA</span
+          >. Conformity is evaluated based on
+          <a href="./validation" class="select-info mdf-link"
+            >this validation method</a
+          >.
+        </p>
       </div>
     </header>
     <main>
-      <template id="conformity-cell-template">
-        <style>
+      <template id="conformity-cell-template"
+        ><style>
           :host {
             display: table-cell;
-            border: 2px solid var(--border-color);
+            --color: red;
+            --bg: blue;
+          }
+
+          :host(:hover) {
+            .cell-content {
+              box-shadow: 0 0 0 0.25rem var(--mdf-color-border-default);
+            }
           }
 
           .visually-hidden {
@@ -62,8 +63,29 @@
           }
 
           .cell-content {
-            padding: 10px;
+            color: var(--color);
+            background-color: var(--bg);
+
+            padding: 1rem;
             white-space: nowrap;
+            min-width: 150px;
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.1);
+            border-radius: 1rem;
+
+            p {
+              margin: 0;
+            }
+
+            .lorem {
+              text-transform: capitalize;
+              font-size: 1.2rem;
+              font-weight: 400;
+              white-space: wrap;
+            }
           }
 
           .contrast-level-container {
@@ -71,14 +93,15 @@
             color: black;
             padding: 1px 3px;
             border-radius: 3px;
-            border: 2px solid var(--border-color);
             display: inline-block;
+            width: fit-content;
           }
         </style>
         <td>
           <div class="cell-content">
             <p>
-              <span class="visually-hidden">Example text :</span>Lorem ipsum
+              <span class="visually-hidden">Example text :</span
+              ><span class="lorem"><slot name="lorem-ipsum"></slot></span>
             </p>
             <div class="contrast-level-container">
               <slot name="contrast-level"></slot>
@@ -89,50 +112,64 @@
 
       <form>
         <div class="form-group">
-          <label for="tokens" class="mdf-textarea-control">
-            Tokens as JSON or CSS variables
+          <label for="tokens" class="mdf-textarea">
+            <div class="mdf-textarea-label">
+              Design tokens as DTCG JSON or CSS variables
+            </div>
             <textarea
               id="tokens"
               name="tokens"
-              class="mdf-textarea textarea"
+              class="mdf-textarea-field textarea"
             ></textarea>
           </label>
         </div>
         <div class="form-group">
-          <label for="contrast-validation">Contrast validation method</label>
+          <label for="contrast-validation" class="mdf-input-label"
+            >Contrast validation method</label
+          >
           <select
-            class="mdf-select"
+            class="mdf-select-field"
             name="contrast-validation"
             id="contrast-validation"
             value="wcag2.2AA"
           >
             <option value="wcag2.2AA">WCAG 2.2 AA</option>
+            <option value="wcag2.2AA.large">WCAG 2.2 AA large text</option>
             <option value="wcag2.2AAA">WCAG 2.2 AAA</option>
+            <option value="wcag2.2AAA.large">WCAG 2.2 AAA large text</option>
             <option value="rgaa4.1">RGAA 4.1</option>
-            <option value="rgaa4.1">RAAM 1</option>
+            <option value="rgaa4.1.large">RGAA 4.1 large text</option>
           </select>
-          <a href="./validation.html" class="select-info mdf-link"
-            >How does the contrast validation work ?
-            <span aria-hidden="true">🔦</span></a
-          >
         </div>
+
         <div class="form-group">
-          <label for="text-size">Text size</label>
-          <select
-            name="text-size"
-            id="text-size"
-            value="normal"
-            class="mdf-select"
-          >
-            <option value="normal">Normal</option>
-            <option value="large">Large</option>
-          </select>
-        </div>
-        <div class="form-group inline">
-          <label for="only-ok" class="mdf-checkbox-control">
-            <input type="checkbox" id="only-ok" class="mdf-checkbox" />
-            Only combinations with a high enough contrast</label
-          >
+          <div class="checkbox-container">
+            <label class="checkbox" for="contrast-checkbox">
+              <div class="checkbox-input-box">
+                <input
+                  type="checkbox"
+                  class="mdf-checkbox-field"
+                  id="contrast-checkbox"
+                />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 33.6 33.6"
+                  class="checkbox-tick"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M 9.7999 17.22 L 14 21.4 L 23.8 11.6"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    pathLength="1"
+                  />
+                </svg>
+              </div>
+              Only show color combinations with a high enough contrast
+            </label>
+          </div>
         </div>
       </form>
 
@@ -157,4 +194,53 @@
       </div>
     </main>
   </body>
+  <footer>
+    <ul>
+      <li>
+        <a
+          class="mdf-link footer-link"
+          href="https://github.com/GuillaumeMMM/design-tokens-contrast-grid"
+          target="_blank"
+        >
+          Open in github&nbsp;<svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 32 32"
+            aria-label="New tab"
+          >
+            <path
+              fill="currentColor"
+              d="M26,28H6a2.0027,2.0027,0,0,1-2-2V6A2.0027,2.0027,0,0,1,6,4H16V6H6V26H26V16h2V26A2.0027,2.0027,0,0,1,26,28Z"
+            />
+            <polygon
+              fill="currentColor"
+              points="20 2 20 4 26.586 4 18 12.586 19.414 14 28 5.414 28 12 30 12 30 2 20 2"
+            />
+          </svg>
+        </a>
+      </li>
+
+      <li>
+        <a
+          class="mdf-link footer-link"
+          target="_blank"
+          href="https://guillaumemeigniez.me"
+        >
+          guillaumemeigniez.me&nbsp;<svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 32 32"
+            aria-label="New tab"
+          >
+            <path
+              fill="currentColor"
+              d="M26,28H6a2.0027,2.0027,0,0,1-2-2V6A2.0027,2.0027,0,0,1,6,4H16V6H6V26H26V16h2V26A2.0027,2.0027,0,0,1,26,28Z"
+            />
+            <polygon
+              fill="currentColor"
+              points="20 2 20 4 26.586 4 18 12.586 19.414 14 28 5.414 28 12 30 12 30 2 20 2"
+            />
+          </svg>
+        </a>
+      </li>
+    </ul>
+  </footer>
 </html>

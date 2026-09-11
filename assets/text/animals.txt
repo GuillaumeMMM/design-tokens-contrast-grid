@@ -1,0 +1,297 @@
+Aardvark
+Civet
+Penguin
+Tree Toad
+Wild Dog
+Ainu Dog
+Akbash
+Akita
+Albatross
+Alligator
+Bulldog
+Coonhound
+Foxhound
+Angelfish
+Ant
+Anteater
+Antelope
+Armadillo
+Mist
+Shepherd
+Terrier
+Avocet
+Axolotl
+Aye Aye
+Baboon
+Badger
+Balinese
+Bandicoot
+Barb
+Barn Owl
+Barnacle
+Barracuda
+Bat
+Beagle
+Bear
+Beaver
+Beetle
+Binturong
+Bird
+Birman
+Bison
+Bobcat
+Bombay
+Bongo
+Bonobo
+Booby
+Boxer Dog
+Buffalo
+Bulldog
+Bullfrog
+Burmese
+Butterfly
+Caiman
+Camel
+Capybara
+Caracal
+Cassowary
+Cat
+Catfish
+Centipede
+Chameleon
+Chamois
+Cheetah
+Chicken
+Chihuahua
+Chinook
+Chipmunk
+Chow Chow
+Cichlid
+Coati
+Cockroach
+Collie
+Coral
+Cougar
+Cow
+Coyote
+Crab
+Crane
+Crocodile
+Cuscus
+Dachshund
+Dalmatian
+Deer
+Dhole
+Dingo
+Discus
+Dodo
+Dog
+Dolphin
+Donkey
+Dormouse
+Dragonfly
+Drever
+Duck
+Dugong
+Dunker
+Eagle
+Earwig
+Echidna
+Elephant
+Emu
+Shepherd
+Falcon
+Ferret
+Fin Whale
+Fish
+Flamingo
+Flounder
+Fly
+Fossa
+Fox
+Frog
+Fur Seal
+Gar
+Gecko
+Gerbil
+Gharial
+Gibbon
+Giraffe
+Glow Worm
+Goat
+Goose
+Gopher
+Gorilla
+Grey Seal
+Greyhound
+Grouse
+Guppy
+Hamster
+Hare
+Harrier
+Havanese
+Hedgehog
+Heron
+Himalayan
+Honey Bee
+Horse
+Human
+Hyena
+Ibis
+Iguana
+Impala
+Elephant
+Indri
+Insect
+Jackal
+Jaguar
+Javanese
+Jellyfish
+Kakapo
+Kangaroo
+King Crab
+Kiwi
+Koala
+Kudu
+Ladybird
+Lemming
+Lemur
+Leopard
+Liger
+Lion
+Lionfish
+Lizard
+Llama
+Lobster
+Lynx
+Macaw
+Magpie
+Maltese
+Manatee
+Mandrill
+Manta Ray
+Markhor
+Mastiff
+Mayfly
+Meerkat
+Millipede
+Mole
+Molly
+Mongoose
+Mongrel
+Monkey
+Moorhen
+Moose
+Moray Eel
+Moth
+Mouse
+Mule
+Newt
+Numbat
+Ocelot
+Octopus
+Okapi
+Olm
+Opossum
+Ostrich
+Otter
+Oyster
+Pademelon
+Panther
+Parrot
+Peacock
+Pekingese
+Pelican
+Penguin
+Persian
+Pheasant
+Pig
+Pika
+Pike
+Piranha
+Platypus
+Pointer
+Poodle
+Pool Frog
+Porcupine
+Possum
+Prawn
+Puffin
+Pug
+Puma
+Puss Moth
+Quail
+Quetzal
+Quokka
+Quoll
+Rabbit
+Raccoon
+Ragdoll
+Rat
+Red Panda
+Red Wolf
+Reindeer
+Robin
+Saola
+Scorpion
+Sea Lion
+Sea Otter
+Sea Slug
+Seahorse
+Seal
+Serval
+Sheep
+Shih Tzu
+Shrimp
+Siamese
+Siberian
+Skunk
+Sloth
+Slow Worm
+Snail
+Snake
+Snowshoe
+Snowy Owl
+Somali
+Sparrow
+Sponge
+Squid
+Squirrel
+Starfish
+Stingray
+Stoat
+Sun Bear
+Swan
+Tang
+Tapir
+Tarsier
+Tawny Owl
+Termite
+Tetra
+Tiffany
+Tiger
+Tortoise
+Toucan
+Tree Frog
+Tuatara
+Turkey
+Uakari
+Uguisu
+Vulture
+Wallaby
+Walrus
+Warthog
+Wasp
+Weasel
+Whippet
+Wild Boar
+Wolf
+Wolverine
+Wombat
+Woodlouse
+Wrasse
+Yak
+Zebra
+Zebu
+Zonkey
+Zorse

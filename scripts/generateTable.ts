@@ -1,12 +1,22 @@
 import { Color } from "./types";
 import { getContrast, getContrastLevel } from "./contrast";
+import adjectivesRaw from "../assets/text/adjectives.txt?raw";
+import anomalsRaw from "../assets/text/animals.txt?raw";
+
+const adjectives = adjectivesRaw.split("\n");
+const animals = anomalsRaw.split("\n");
+
+export function getWord() {
+  const rand1 = Math.trunc(Math.random() * adjectives.length);
+  const rand2 = Math.trunc(Math.random() * animals.length);
+  return `${adjectives[rand1]} ${animals[rand2]}`;
+}
 
 export function generateTable(
   textColors: Color[],
   backgroundColors: Color[],
   contrastMethod: string,
-  textSize: "normal" | "large",
-  onlyShowOK: boolean
+  onlyShowOK: boolean,
 ) {
   const table = document.getElementById("contrast-table");
   const tableHeadRow = table?.querySelector("thead > tr");
@@ -75,19 +85,22 @@ export function generateTable(
         tableBody.appendChild(tr);
       }
       const row = tableBody.querySelector(
-        `tr:nth-of-type(${txtColorIndex + 1})`
+        `tr:nth-of-type(${txtColorIndex + 1})`,
       );
       const contrastLevel = getContrast(txtColor.code, bgColor.code);
+      const isLarge = Boolean(contrastMethod.split(".large")[1]);
       const isValidContrast =
         contrastLevel >
-        getContrastLevel({ level: contrastMethod, size: textSize });
+        getContrastLevel({
+          level: contrastMethod,
+          size: isLarge ? "large" : "normal",
+        });
 
       if (!onlyShowOK || isValidContrast) {
         const cell = document.createElement("conformity-cell");
 
-        cell.style.color = `${txtColor.initialVal}`;
-        cell.style.backgroundColor = `${bgColor.initialVal}`;
-        cell.style.fontSize = textSize === "large" ? "1.5rem" : "1rem";
+        cell.style.setProperty("--color", `${txtColor.initialVal}`);
+        cell.style.setProperty("--bg", `${bgColor.initialVal}`);
 
         const contrastLevelSpan = document.createElement("span");
         contrastLevelSpan.setAttribute("slot", "contrast-level");
@@ -98,6 +111,12 @@ export function generateTable(
         } background"</span><span aria-hidden="true">${
           isValidContrast ? "✅" : "❌"
         }</span> ${contrastLevel.toFixed(1)}:1`;
+
+        const exampleTextSpan = document.createElement("span");
+        exampleTextSpan.setAttribute("slot", "lorem-ipsum");
+        exampleTextSpan.textContent = getWord();
+
+        cell.appendChild(exampleTextSpan);
         cell.appendChild(contrastLevelSpan);
 
         row?.appendChild(cell);

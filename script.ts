@@ -10,7 +10,6 @@ const defaultColors = `--white: #ffffff;
 --grey-3: #222222;`;
 
 const defaultForm = {
-  textSize: "normal" as "normal" | "large",
   contrastMethod: "wcag2.2AA",
   onlyShowOK: false,
   tokens: defaultColors,
@@ -52,12 +51,13 @@ function getColorsFromCSSTokens(tokens: string) {
 function getColorsFromJSONTokens(tokens: Object) {
   const values = {};
 
-  function traverse(currentObj, currentName) {
+  function traverse(currentObj: any, currentName: any) {
     for (const [key, value] of Object.entries(currentObj)) {
       const newKey = currentName ? `${currentName}-${key}` : key;
       if (typeof value === "object" && value !== null) {
         traverse(value, newKey);
       } else {
+        //  @ts-expect-error
         values[newKey] = value;
       }
     }
@@ -84,37 +84,28 @@ customElements.define(
 
       const template = (
         document?.getElementById(
-          "conformity-cell-template"
+          "conformity-cell-template",
         ) as HTMLTemplateElement
       )?.content;
       this.attachShadow({ mode: "open" }).appendChild(template.cloneNode(true));
     }
-  }
+  },
 );
 
 const tokensInput = document.getElementById(
-  "tokens"
+  "tokens",
 ) as HTMLTextAreaElement | null;
 const contrastMethodSelect = document.getElementById(
-  "contrast-validation"
-) as HTMLSelectElement | null;
-const textSizeSelect = document.getElementById(
-  "text-size"
+  "contrast-validation",
 ) as HTMLSelectElement | null;
 const onlyOkCheckbox = document.getElementById(
-  "only-ok"
+  "contrast-checkbox",
 ) as HTMLInputElement | null;
 const saveButton = document.getElementById(
-  "save-button"
+  "save-button",
 ) as HTMLButtonElement | null;
 
-if (
-  !contrastMethodSelect ||
-  !textSizeSelect ||
-  !onlyOkCheckbox ||
-  !tokensInput ||
-  !saveButton
-) {
+if (!contrastMethodSelect || !onlyOkCheckbox || !tokensInput || !saveButton) {
   throw new Error("Element not found");
 }
 
@@ -133,7 +124,6 @@ const localStorageForm = JSON.parse(formFromLocalStorageRaw ?? "{}");
 tokensInput.value = localStorageForm.tokens ?? defaultForm.tokens;
 contrastMethodSelect.value =
   localStorageForm.contrastMethod ?? defaultForm.contrastMethod;
-textSizeSelect.value = localStorageForm.textSize ?? defaultForm.textSize;
 onlyOkCheckbox.checked = localStorageForm.onlyShowOK ?? defaultForm.onlyShowOK;
 
 onFormSettingsChange();
@@ -146,11 +136,6 @@ tokensInput.addEventListener("input", (e: Event) => {
 
 contrastMethodSelect.addEventListener("change", (e: Event) => {
   form.contrastMethod = (e.target as HTMLSelectElement).value;
-  onFormSettingsChange();
-});
-
-textSizeSelect.addEventListener("change", (e: Event) => {
-  form.textSize = (e.target as HTMLSelectElement).value as "normal" | "large";
   onFormSettingsChange();
 });
 
@@ -173,13 +158,11 @@ saveButton.addEventListener("click", () => {
       Array.from(table.getElementsByClassName("show-on-export")).forEach(
         (el) => {
           (el as HTMLElement).style.display = "none";
-        }
+        },
       );
 
       const link = document.createElement("a");
-      link.download = `design-tokens-contrast-checker_${form.contrastMethod}_${
-        form.textSize
-      }_${new Date().getTime()}.jpeg`;
+      link.download = `design-tokens-contrast-checker_${form.contrastMethod}_${new Date().getTime()}.jpeg`;
       link.href = canvas.toDataURL("image/jpeg", 1);
       link.click();
       link.parentElement?.removeChild(link);
@@ -189,13 +172,7 @@ saveButton.addEventListener("click", () => {
 
 function onFormSettingsChange() {
   saveFormToLocalStorage();
-  generateTable(
-    form.colors,
-    form.colors,
-    form.contrastMethod,
-    form.textSize,
-    form.onlyShowOK
-  );
+  generateTable(form.colors, form.colors, form.contrastMethod, form.onlyShowOK);
 }
 
 function saveFormToLocalStorage() {

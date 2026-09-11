@@ -1,0 +1,296 @@
+@import "node_modules/@guillaumemmm/marquedefabrique/dist/css/variables.css";
+@import "node_modules/@guillaumemmm/marquedefabrique/dist/css/reset.css";
+@import "node_modules/@guillaumemmm/marquedefabrique/dist/css/kit.css";
+
+
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("../assets/fonts/IBMPlexSans-VariableFont_wdth,wght.woff2") format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("../assets/fonts/IBMPlexSans-Italic-VariableFont_wdth,wght.woff2") format('woff2');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+body {
+  background-color: var(--mdf-color-background-muted);
+  min-height: 100vh;
+  font-family: "IBM Plex Sans", "system-ui", "Arial";
+  display: flex;
+  flex-direction: column;
+  line-height: 1.5;
+}
+
+header {
+  min-height: 60vh;
+  padding: 1rem;
+  background: linear-gradient(var(--mdf-color-background-default), transparent);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+
+    .title {
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .info {
+      display: block;
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+  }
+
+  .illustrations {
+    overflow: hidden;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-image: radial-gradient(circle, var(--mdf-color-text-muted) 1px, transparent 1px);
+    background-size: cover;
+    background-position: center;
+    background-size: 18px 18px;
+    -webkit-mask-image: radial-gradient(ellipse at center, transparent 30%, black 100%);
+    mask-image: radial-gradient(ellipse at center, transparent 30%, black 100%);
+
+
+    top: 0;
+    left: 0;
+
+    .fade {
+      width: 100%;
+      height: 50%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      background: linear-gradient(transparent, var(--mdf-color-background-muted));
+    }
+
+    --size: 50vh;
+
+    .fade-top-left,
+    .fade-top-right {
+      z-index: 2;
+      width: var(--size);
+      height: var(--size);
+      position: absolute;
+      top: calc(-0.5 * var(--size));
+      left: calc(-0.5 * var(--size));
+      background: radial-gradient(var(--mdf-color-background-default) 30%, transparent);
+      animation: fade-in 1s ease-out both;
+
+      @media (prefers-reduced-motion: reduce) {
+        &::-webkit-progress-value {
+          animation: none;
+        }
+      }
+    }
+
+    .fade-top-right {
+      left: unset;
+      right: calc(-0.5 * var(--size));
+    }
+  }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 800px;
+  margin: 0 auto 4rem auto;
+  padding: 1rem;
+
+  .form-group {
+    position: relative;
+  }
+
+  .mdf-textarea-label,
+  .mdf-input-label {
+    font-weight: 500;
+    margin-bottom: 5px;
+    display: block;
+    box-shadow: none;
+  }
+
+  textarea.mdf-textarea-field {
+    width: 100%;
+    background-color: var(--mdf-color-background-default);
+    min-height: 40vh;
+  }
+
+  select.mdf-select-field {
+    background-color: var(--mdf-color-background-default);
+  }
+
+  .checkbox-container {
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+
+    .checkbox {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background-color: var(--mdf-color-background-default);
+      border: 1px solid var(--mdf-color-border-muted);
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      box-shadow: none;
+
+      &:has(input:checked) {
+        background-color: var(--mdf-color-background-brand-secondary);
+        border: 1px solid var(--mdf-color-border-brand-secondary);
+      }
+
+      .checkbox-input-box {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+
+      input[type="checkbox"] {
+        --line-height: 1.5;
+        width: calc(1.4rem * var(--line-height));
+        height: calc(1.4rem * var(--line-height));
+        border-radius: 3px;
+        border: 1px solid var(--mdf-color-text-muted);
+        background-color: var(--mdf-color-background-default);
+        transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out;
+
+        &:hover {
+          background-color: var(--mdf-color-background-muted);
+        }
+
+        &:checked {
+          background-color: var(--mdf-color-purple-500);
+          border-color: var(--mdf-color-purple-100);
+        }
+      }
+
+
+      @media (prefers-reduced-motion: reduce) {
+        input[type="checkbox"] {
+          transition: none;
+        }
+      }
+
+      &:has(input:checked) {
+        .mdf-checkbox-field:before {
+          display: none;
+        }
+
+        .checkbox-tick {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          pointer-events: none;
+          stroke-dasharray: 1;
+          stroke-dashoffset: 1;
+          animation: draw-tick 0.15s 0.1s ease forwards;
+
+          path {
+            color: white;
+            stroke-width: 1.5px;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .checkbox-tick {
+            stroke-dashoffset: 0;
+            animation: none;
+          }
+        }
+      }
+
+      &:not(:has(input:checked)) {
+        .checkbox-tick {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+footer {
+  padding: 4rem 0;
+  border-top: 1px solid var(--mdf-color-border-muted);
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    row-gap: 2rem;
+  }
+
+
+  .footer-link {
+    background-color: transparent;
+    text-underline-offset: 3px;
+
+    &:hover,
+    &:visited:hover {
+      background-color: var(--mdf-color-background-muted);
+    }
+  }
+
+  a.mdf-link,
+  a.mdf-link:visited {
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    border: 1px solid var(--mdf-color-border-default);
+    text-decoration: none;
+    background-color: var(--mdf-color-background-default);
+    vertical-align: middle;
+
+    &:hover,
+    &:hover:visited {
+      box-shadow: 0 0 0 4px var(--mdf-color-border-muted);
+      background-color: var(--mdf-color-background-default);
+    }
+
+    svg {
+      vertical-align: sub;
+      width: 1.2rem;
+      height: 1.2rem;
+      margin-left: 5px;
+    }
+  }
+}
+
+.contrast-table-container {
+  margin-top: 2rem;
+
+  table {
+    border-collapse: separate;
+    border-spacing: 5px;
+    background-color: var(--mdf-color-background-default);
+  }
+}
+
+@keyframes draw-tick {
+  to {
+    stroke-dashoffset: 0;
+  }
+}

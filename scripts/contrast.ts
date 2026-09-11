@@ -2,7 +2,7 @@ import { Color } from "./types";
 
 export function getContrast(
   text: Color["code"],
-  background: Color["code"]
+  background: Color["code"],
 ): number {
   const c1 = { r: text.values[0], g: text.values[1], b: text.values[2] };
   const c2 = {
@@ -17,7 +17,7 @@ export function getContrast(
   return l1 > l2 ? (l1 + 0.05) / (l2 + 0.05) : (l2 + 0.05) / (l1 + 0.05);
 }
 
-function luminance(color): number {
+function luminance(color: [number, number, number]): number {
   const r = relativeLuminance(color[0]);
   const g = relativeLuminance(color[1]);
   const b = relativeLuminance(color[2]);
@@ -37,7 +37,6 @@ export function getContrastLevel({ level = "AAA", size = "normal" }): number {
       return size === "normal" ? 7 : 4.5;
     }
     case "rgaa4.1":
-    case "raam.1":
     case "wcag2.2AA": {
       return size === "normal" ? 4.5 : 3;
     }
