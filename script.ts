@@ -1,8 +1,12 @@
 import html2canvas from "html2canvas";
 import { generateTable } from "./scripts/generateTable";
 import { Color } from "./scripts/types";
-import parse from "color-parse";
 import { isLocalStorageAvailable } from "./scripts/localsotrage";
+import { colord, extend } from "colord";
+import a11yPlugin from "colord/plugins/a11y";
+import { getContrastLevel } from "./scripts/contrast";
+
+extend([a11yPlugin]);
 
 const defaultColors = `--white: #ffffff;
 --grey-1: #b1b1b3;
@@ -36,14 +40,17 @@ function getColorsFromCSSTokens(tokens: string) {
       const [name, code] = line
         .split(":")
         .map((el) => el.trim().replaceAll(";", ""));
+
+      const colordVal = colord(code);
       const color: Color = {
-        code: parse(code),
+        colorHex: colordVal.isValid() ? colordVal.toHex() : "",
         initialVal: code,
         name,
       };
 
       return color;
-    });
+    })
+    .filter((c) => Boolean(c.colorHex));
 
   return colors;
 }
@@ -66,9 +73,9 @@ function getColorsFromJSONTokens(tokens: Object) {
   traverse(tokens, "");
 
   const validColors: Color[] = Object.entries(values)
-    .filter(([key, val]) => typeof val === "string" && parse(val).space)
+    .filter(([key, val]) => typeof val === "string" && colord(val).isValid())
     .map(([key, val]) => ({
-      code: parse(val as string),
+      colorHex: colord(val as string).toHex(),
       initialVal: val as string,
       name: key,
     }));
@@ -104,8 +111,17 @@ const onlyOkCheckbox = document.getElementById(
 const saveButton = document.getElementById(
   "save-button",
 ) as HTMLButtonElement | null;
+const saveButtonJSON = document.getElementById(
+  "save-button-json",
+) as HTMLButtonElement | null;
 
-if (!contrastMethodSelect || !onlyOkCheckbox || !tokensInput || !saveButton) {
+if (
+  !contrastMethodSelect ||
+  !onlyOkCheckbox ||
+  !tokensInput ||
+  !saveButton ||
+  !saveButtonJSON
+) {
   throw new Error("Element not found");
 }
 
@@ -150,14 +166,14 @@ saveButton.addEventListener("click", () => {
   if (table) {
     //  Show additional informations
     Array.from(table.getElementsByClassName("show-on-export")).forEach((el) => {
-      (el as HTMLElement).style.display = "inline-block";
+      (el as HTMLElement).classList.remove("visually-hidden");
     });
 
     html2canvas(table).then((canvas) => {
       //  Hide additional informations
       Array.from(table.getElementsByClassName("show-on-export")).forEach(
         (el) => {
-          (el as HTMLElement).style.display = "none";
+          (el as HTMLElement).classList.add("visually-hidden");
         },
       );
 
@@ -168,6 +184,44 @@ saveButton.addEventListener("click", () => {
       link.parentElement?.removeChild(link);
     });
   }
+});
+
+saveButtonJSON.addEventListener("click", () => {
+  const res: unknown[] = [];
+  form.colors.forEach((color1: Color) => {
+    form.colors.forEach((color2: Color) => {
+      const level = colord(color1.colorHex).contrast(color2.colorHex);
+      const method = form.contrastMethod;
+      const isLarge = Boolean(method.split(".large")[1]);
+      const isValidContrast =
+        level >
+        getContrastLevel({
+          level: method,
+          size: isLarge ? "large" : "normal",
+        });
+      res.push({
+        color1,
+        color2,
+        contrast: colord(color1.colorHex).contrast(color2.colorHex),
+        method: form.contrastMethod,
+        isValid: isValidContrast,
+      });
+    });
+  });
+
+  const jsonString = JSON.stringify(res, null, 2);
+  const blob = new Blob([jsonString], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `design-tokens-contrast-checker_${form.contrastMethod}_${new Date().getTime()}.json`;
+
+  document.body.appendChild(link);
+  link.click();
+
+  URL.revokeObjectURL(url);
+  link.remove();
 });
 
 function onFormSettingsChange() {

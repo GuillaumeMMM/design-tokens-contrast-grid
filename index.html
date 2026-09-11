@@ -24,7 +24,7 @@
         <p class="info mdf-muted">
           Visualize all the colors of your design system at once and easily
           <span class="mdf-highlighted mdf-highlighted-secondary"
-            >filter the background/text combinations that comply with WCAG and
+            >find the background/text combinations that comply with WCAG and
             RGAA</span
           >. Conformity is evaluated based on
           <a href="./validation" class="select-info mdf-link"
@@ -38,13 +38,13 @@
         ><style>
           :host {
             display: table-cell;
-            --color: red;
-            --bg: blue;
+            --color: white;
+            --bg: black;
           }
 
           :host(:hover) {
             .cell-content {
-              box-shadow: 0 0 0 0.25rem var(--mdf-color-border-default);
+              box-shadow: 0 0 0 2px var(--mdf-color-border-default);
             }
           }
 
@@ -68,13 +68,14 @@
 
             padding: 1rem;
             white-space: nowrap;
-            min-width: 150px;
-            min-height: 150px;
+            width: 150px;
+            height: 150px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.1);
             border-radius: 1rem;
+            position: relative;
 
             p {
               margin: 0;
@@ -103,8 +104,12 @@
               <span class="visually-hidden">Example text :</span
               ><span class="lorem"><slot name="lorem-ipsum"></slot></span>
             </p>
-            <div class="contrast-level-container">
-              <slot name="contrast-level"></slot>
+
+            <div class="bottom">
+              <div class="contrast-level-container">
+                <slot name="contrast-level"></slot>
+              </div>
+              <slot name="contrast-link"></slot>
             </div>
           </div>
         </td>
@@ -171,11 +176,52 @@
             </label>
           </div>
         </div>
-      </form>
 
-      <button type="button" id="save-button" class="save-button mdf-button">
-        <span aria-hidden="true">💾&nbsp;&nbsp;</span>Save as image (.jpg)
-      </button>
+        <div class="buttons">
+          <button type="button" id="save-button" class="save-button mdf-button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+              aria-hidden="true"
+            >
+              <path
+                fill="currentColor"
+                d="M26,24v4H6V24H4v4H4a2,2,0,0,0,2,2H26a2,2,0,0,0,2-2h0V24Z"
+              />
+              <polygon
+                fill="currentColor"
+                points="26 14 24.59 12.59 17 20.17 17 2 15 2 15 20.17 7.41 12.59 6 14 16 24 26 14"
+              />
+            </svg>
+            Download as .jpg
+          </button>
+          <button
+            type="button"
+            id="save-button-json"
+            class="save-button mdf-button"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+              aria-hidden="true"
+            >
+              <path
+                fill="currentColor"
+                d="M26,24v4H6V24H4v4H4a2,2,0,0,0,2,2H26a2,2,0,0,0,2-2h0V24Z"
+              />
+              <polygon
+                fill="currentColor"
+                points="26 14 24.59 12.59 17 20.17 17 2 15 2 15 20.17 7.41 12.59 6 14 16 24 26 14"
+              />
+            </svg>
+            Download as JSON
+          </button>
+        </div>
+      </form>
 
       <div class="contrast-table-container">
         <table id="contrast-table">
@@ -183,12 +229,9 @@
             <tr></tr>
           </thead>
           <tbody></tbody>
-          <caption>
+          <caption class="show-on-export visually-hidden">
             Constrast combinations table with text color rows and background
-            color columns.
-            <span class="show-on-export" aria-hidden="true"
-              >Made with contrastcheckergrid.com.</span
-            >
+            color columns. Made with contrastcheckergrid.com.
           </caption>
         </table>
       </div>

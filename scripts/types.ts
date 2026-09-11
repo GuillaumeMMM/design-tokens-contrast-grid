@@ -1,8 +1,5 @@
 export type Color = {
   name: string;
-  code: {
-    values: number[];
-    alpha: number;
-  };
+  colorHex: string;
   initialVal: string | number;
 };
